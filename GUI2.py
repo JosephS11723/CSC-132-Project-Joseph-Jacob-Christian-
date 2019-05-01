@@ -29,22 +29,6 @@ def delete5():
     screen5.destroy()
 
 
-def saved():
-    saved = t.Label(screen7, text = "Note saved", fg = "green", font = ("Calibri", 11))
-    saved.pack()
-    screen7.after(1500, saved.destroy)
-
-def save():
-    filename = raw_filename.get()
-    notes = raw_notes.get()
-
-    data = open(filename, "w")
-    data.write(notes)
-    data.close()
-
-    saved()
-
-
 def open_drawer():
     pass
     
@@ -128,8 +112,9 @@ def login_verify():
     password1 = password_verify.get()
     username_entry1.delete(0, END)
     password_entry1.delete(0, END)
-
-    list_of_files = os.listdir()
+    
+    DIR = None #Path
+    list_of_files = os.listdir(DIR)
     if username1 in list_of_files:
         file1 = open(username1, "r")
         verify = file1.read().splitlines()
