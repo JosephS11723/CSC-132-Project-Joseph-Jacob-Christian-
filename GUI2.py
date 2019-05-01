@@ -113,7 +113,7 @@ def login_verify():
     username_entry1.delete(0, END)
     password_entry1.delete(0, END)
     
-    DIR = None #Path
+    DIR = os.path.dirname(__file__) #Path
     list_of_files = os.listdir(DIR)
     if username1 in list_of_files:
         file1 = open(username1, "r")
