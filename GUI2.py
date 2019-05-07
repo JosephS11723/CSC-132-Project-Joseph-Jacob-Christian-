@@ -1,4 +1,6 @@
 import os
+import RPi.GPIO as GPIO
+from time import sleep
 import time
 import Tkinter as t
 from Tkinter import *
@@ -30,8 +32,22 @@ def delete5():
 
 
 def open_drawer():
-    pass
+    # 0.001 for counter clockwise - 4 loops - 0.001
+    # 0.005 for clockwise - 7 loops - 0.005
+    for n in range(7):
+        sleep(1)
+        GPIO.output(d1, GPIO.HIGH)
+        sleep(0.005)
+        GPIO.output(, GPIO.LOW)
+        sleep(0.005)
     
+def close_drawer():
+    for n in range(7):
+        sleep(1)
+        GPIO.output(S, GPIO.HIGH)
+        sleep(0.001)
+        GPIO.output(S, GPIO.LOW)
+        sleep(0.005)
 
 
 def session():
@@ -174,5 +190,6 @@ def main_screen():
 
 
     screen.mainloop()
-
+    
+GPIO.setmode(GPIO.BCM)
 main_screen()
