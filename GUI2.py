@@ -29,23 +29,29 @@ def delete4():
 
 def delete5():
     screen5.destroy()
-
+    
+def initialization():
+    # Open Drawer
+    open_drawer()
+    sleep(10)
+    close_drawer()
+    
 
 def open_drawer():
     # 0.001 for counter clockwise - 4 loops - 0.001
     # 0.005 for clockwise - 7 loops - 0.005
-    for n in range(7):
+    for n in range(4):
         sleep(1)
         GPIO.output(d1, GPIO.HIGH)
-        sleep(0.005)
+        sleep(0.001)
         GPIO.output(, GPIO.LOW)
-        sleep(0.005)
+        sleep(0.001)
     
 def close_drawer():
     for n in range(7):
         sleep(1)
         GPIO.output(S, GPIO.HIGH)
-        sleep(0.001)
+        sleep(0.005)
         GPIO.output(S, GPIO.LOW)
         sleep(0.005)
 
@@ -191,5 +197,10 @@ def main_screen():
 
     screen.mainloop()
     
+################################################MAIN###################################################################################
 GPIO.setmode(GPIO.BCM)
+S = 26
+GPIO.setup(S, GPIO.OUT)
+
+GPIO.cleanup()
 main_screen()
