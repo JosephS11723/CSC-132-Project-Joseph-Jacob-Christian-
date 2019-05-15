@@ -11,26 +11,17 @@ reader = SimpleMFRC522()
 def back1():
     screen1.destroy()
 
-
 def back2():
-    screen2.destroy()
-    
-    
+    screen2.destroy() 
 
 def exit():
     screen.destroy()
 
+def delete6():
+    screen6.destroy()
 
-def delete3():
-    screen3.destroy()
-
-
-def delete4():
-    screen4.destroy()
-
-
-def delete5():
-    screen5.destroy()
+def delete7():
+    screen7.destroy()
     
 def initialization():
     # Open Drawer
@@ -38,10 +29,14 @@ def initialization():
     sleep(10)
     close_drawer()
     
-
 def open_drawer():
     # 0.001 for counter clockwise - 4 loops - 0.001
     # 0.005 for clockwise - 7 loops - 0.005
+    ########################################################
+    ## This part needs to be tested with initialization() ##
+    endSession()
+    delete6()
+    ########################################################
     GPIO.setmode(GPIO.BCM)
     S = 26
     GPIO.setup(S,GPIO.OUT)
@@ -54,6 +49,7 @@ def open_drawer():
     GPIO.cleanup()
     
 def close_drawer():
+    delete7()
     GPIO.setmode(GPIO.BCM)
     S = 26
     GPIO.setup(S,GPIO.OUT)
@@ -66,31 +62,27 @@ def close_drawer():
     GPIO.cleanup()
 
 def session():
+    global screen6
     screen6 = Toplevel(screen)
     screen6.title("Dashboard")
-    screen6.geometry("400x400")
+    screen6.attributes("-fullscreen", True)
     Label(screen6, text = "Welcome to the dashboard").pack()
-    ################## input ######################
     Button(screen6, text = "Open Drawer", command = open_drawer).pack()
-    Button(screen6, text = "Close Drawer", command = close_drawer).pack()
-
+    back2()
 
 def login_success():
     session()
-
 
 def incorrect_password():
     ip = t.Label(screen2, text = "Incorrect password!", fg = "red", font = ("Calibri", 11))
     ip.pack()
     screen2.after(1500, ip.destroy)
 
-
 def user_not_found():
     unf = t.Label(screen2, text = "User not found!", fg = "red", font = ("Calibri", 11))
     unf.pack()
     screen2.after(1500, unf.destroy)
-
-    
+ 
 def register_user():
 
     username_info = username.get()
@@ -106,12 +98,9 @@ def register_user():
     username_entry.delete(0, END)
     password_entry.delete(0, END)
 
-    ################### input #######################
-
     rs = t.Label(screen1, text = "Registration Successful", fg = "green", font = ("Calibri", 11))
     rs.pack()
     screen1.after(1500, rs.destroy)
-
 
 def register():
     global screen1
@@ -138,7 +127,6 @@ def register():
     Button(screen1, text = "Register", width = 10, height = 1, command = register_user).pack()
     Button(screen1, text = "Back", width = 10, height = 1, command = back1).pack()
 
-
 def login_verify():
     global username_verify
     global username1
@@ -161,20 +149,16 @@ def login_verify():
                 login_success()
             else:
                 incorrect_password()
-
         else:
-            incorrect_password()
-            
-
+            incorrect_password()        
     else:
         user_not_found()
     
-
 def login():
     global screen2
     screen2 = Toplevel(screen)
     screen2.title("Login")
-    screen2.geometry("300x250")
+    screen2.attributes("-fullscreen", True)
     Label(screen2, text = "Please enter details below to log in").pack()
     Label(screen2, text = "").pack()
 
@@ -197,14 +181,11 @@ def login():
     Button(screen2, text = "Login", width = 10, height = 1, command = login_verify).pack()
     Button(screen2, text = "Back", width = 10, height = 1, command = back2).pack()
     
-
-
 def main_screen():
     global screen
     screen = Tk()
     screen.title ("Green Light")
-    screen.geometry ("300x250")
-    screen.resizable(False,False)
+    screen.attributes("-fullscreen", True)
     Label(text = "Green Light", bg="green", width="300", height ="2", font = ("Times New Roman", 13)).pack()
     Label(text = "").pack()
     Button(text = "Login", height = "2", width = "30", command = login).pack()
@@ -212,7 +193,6 @@ def main_screen():
     Button(text= "Register", height = "2", width = "30", command = register).pack()
     Label(text="").pack()
     Button(text= "Exit", height = "2", width = "30", command = exit).pack()
-
 
     screen.mainloop()
     
