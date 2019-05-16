@@ -40,12 +40,18 @@ def open_drawerR():
     GPIO.setmode(GPIO.BCM)
     SR = 16
     GPIO.setup(SR,GPIO.OUT)
+    GPIO.setup(R, GPIO.OUT)
+    GPIO.setup(G, GPIO.OUT)
+    GPIO.output(R, GPIO.HIGH)
+    GPIO.output(G, GPIO.HIGH)
+    sleep(0.5)
     for n in range(8):
         sleep(1)
         GPIO.output(SR, GPIO.HIGH)
         sleep(0.005)
         GPIO.output(SR, GPIO.LOW)
         sleep(0.005)
+    GPIO.output(R, GPIO.LOW)        
     GPIO.cleanup()
     
 def close_drawerR():
@@ -53,12 +59,20 @@ def close_drawerR():
     GPIO.setmode(GPIO.BCM)
     SR = 16
     GPIO.setup(SR,GPIO.OUT)
+    GPIO.setup(R, GPIO.OUT)
+    GPIO.setup(G, GPIO.OUT)
+    GPIO.output(R, GPIO.HIGH)
+    GPIO.output(G, GPIO.HIGH)
+    sleep(0.5)
     for n in range(4):
         sleep(1)
         GPIO.output(SR, GPIO.HIGH)
         sleep(0.001)
         GPIO.output(SR, GPIO.LOW)
         sleep(0.001)
+    GPIO.output(R, GPIO.LOW)
+    GPIO.output(G, GPIO.LOW)
+    sleep(0.5)
     GPIO.cleanup()
 
 def open_drawerL():
@@ -73,12 +87,18 @@ def open_drawerL():
     GPIO.setmode(GPIO.BCM)
     SL = 17
     GPIO.setup(SL,GPIO.OUT)
+    GPIO.setup(R, GPIO.OUT)
+    GPIO.setup(G, GPIO.OUT)
+    GPIO.output(R, GPIO.HIGH)
+    GPIO.output(G, GPIO.HIGH)
+    sleep(0.5)
     for n in range(4):
         sleep(1)
         GPIO.output(SL, GPIO.HIGH)
         sleep(0.001)
         GPIO.output(SL, GPIO.LOW)
         sleep(0.001)
+    GPIO.output(R, GPIO.LOW)
     GPIO.cleanup()
     
 def close_drawerL():
@@ -86,12 +106,20 @@ def close_drawerL():
     GPIO.setmode(GPIO.BCM)
     SL = 17
     GPIO.setup(SL,GPIO.OUT)
+    GPIO.setup(R, GPIO.OUT)
+    GPIO.setup(G, GPIO.OUT)
+    GPIO.output(R, GPIO.HIGH)
+    GPIO.output(G, GPIO.HIGH)
+    sleep(0.5)
     for n in range(9):
         sleep(1)
         GPIO.output(SL, GPIO.HIGH)
         sleep(0.005)
         GPIO.output(SL, GPIO.LOW)
         sleep(0.005)
+    GPIO.output(R, GPIO.LOW)
+    GPIO.output(G, GPIO.LOW)
+    sleep(0.5)
     delete9()
     GPIO.cleanup()
     
@@ -100,6 +128,11 @@ def close_drawerA():
     GPIO.setmode(GPIO.BCM)
     SR = 16
     GPIO.setup(SR,GPIO.OUT)
+    GPIO.setup(R, GPIO.OUT)
+    GPIO.setup(G, GPIO.OUT)
+    GPIO.output(R, GPIO.HIGH)
+    GPIO.output(G, GPIO.HIGH)
+    sleep(0.5)
     for n in range(8):
         sleep(1)
         GPIO.output(SR, GPIO.HIGH)
@@ -119,6 +152,9 @@ def close_drawerA():
         sleep(0.001)
         GPIO.output(SL, GPIO.LOW)
         sleep(0.001)
+    GPIO.output(R, GPIO.LOW)
+    GPIO.output(G, GPIO.LOW)
+    sleep(0.5)
     GPIO.cleanup()
     
     
@@ -126,6 +162,11 @@ def open_drawerA():
     GPIO.setmode(GPIO.BCM)
     SR = 16
     GPIO.setup(SR,GPIO.OUT)
+    GPIO.setup(R, GPIO.OUT)
+    GPIO.setup(G, GPIO.OUT)
+    GPIO.output(R, GPIO.HIGH)
+    GPIO.output(G, GPIO.HIGH)
+    sleep(0.5)
     for n in range(4):
         sleep(1)
         GPIO.output(SR, GPIO.HIGH)
@@ -145,10 +186,13 @@ def open_drawerA():
         sleep(0.005)
         GPIO.output(SL, GPIO.LOW)
         sleep(0.005)
+    GPIO.output(R, GPIO.LOW)
     GPIO.cleanup()
 
 def session1():
     global screen6
+    GPIO.output(R, GPIO.HIGH)
+    sleep(0.5)
     screen6 = Toplevel(screen)
     screen6.title("Dashboard")
     screen6.attributes("-fullscreen", True)
@@ -159,6 +203,8 @@ def session1():
     
 def session2():
     global screen6
+    GPIO.output(R, GPIO.HIGH)
+    sleep(0.5)
     screen6 = Toplevel(screen)
     screen6.title("Dashboard")
     screen6.attributes("-fullscreen", True)
@@ -169,6 +215,8 @@ def session2():
     
 def session3():
     global screen6
+    GPIO.output(R, GPIO.HIGH)
+    sleep(0.5)
     screen6 = Toplevel(screen)
     screen6.title("Dashboard")
     screen6.attributes("-fullscreen", True)
@@ -180,6 +228,8 @@ def session3():
     
 def session4():
     global screen6
+    GPIO.output(R, GPIO.HIGH)
+    sleep(0.5)
     screen6 = Toplevel(screen)
     screen6.title("Dashboard")
     screen6.attributes("-fullscreen", True)
@@ -349,5 +399,10 @@ def main_screen():
     screen.mainloop()
     
 ################################################MAIN###################################################################################
-
+R = 18
+G = 19
+B = 20
+GPIO.setup(R, GPIO.OUT)
+GPIO.setup(G, GPIO.OUT)
+GPIO.setup(B, GPIO.OUT)
 main_screen()
