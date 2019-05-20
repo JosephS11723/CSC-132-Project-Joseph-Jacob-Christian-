@@ -5,9 +5,9 @@ import time
 import Tkinter as t
 from Tkinter import *
 from Functions import *
-
+# Creates the variable for the RFID Scanner function which is in the Function File
 reader = SimpleMFRC522()
-
+# Functions for deleting and creating the GUI 
 def back1():
     screen1.destroy()
 
@@ -29,6 +29,7 @@ def delete8():
 def delete9():
     screen9.destroy()
     
+# Function to turn the servo to open the the right drawer
 def open_drawerR():
     # 0.001 for counter clockwise - 4 loops - 0.001
     # 0.005 for clockwise - 7 loops - 0.005
@@ -53,7 +54,7 @@ def open_drawerR():
         sleep(0.005)
     GPIO.output(R, GPIO.LOW)        
     GPIO.cleanup()
-    
+# Function to turn the servo to close the left drawer  
 def close_drawerR():
     delete7()
     GPIO.setmode(GPIO.BCM)
@@ -74,7 +75,7 @@ def close_drawerR():
     GPIO.output(G, GPIO.LOW)
     sleep(0.5)
     GPIO.cleanup()
-
+# Function to turn the servo in order to open the left drawer
 def open_drawerL():
     # 0.001 for counter clockwise - 4 loops - 0.001
     # 0.005 for clockwise - 7 loops - 0.005
@@ -100,7 +101,7 @@ def open_drawerL():
         sleep(0.001)
     GPIO.output(R, GPIO.LOW)
     GPIO.cleanup()
-    
+# Function to turn the servo in order to close and lock the left drawer   
 def close_drawerL():
     delete7()
     GPIO.setmode(GPIO.BCM)
@@ -122,7 +123,7 @@ def close_drawerL():
     sleep(0.5)
     delete9()
     GPIO.cleanup()
-    
+# Function to close the Admin Drawer otherwise known as the bottom drawer which requires both servos to turn 
 def close_drawerA():
     
     GPIO.setmode(GPIO.BCM)
@@ -157,7 +158,7 @@ def close_drawerA():
     sleep(0.5)
     GPIO.cleanup()
     
-    
+# Function to open the Admin Drawer which requires both servos to turn
 def open_drawerA():
     GPIO.setmode(GPIO.BCM)
     SR = 16
@@ -188,7 +189,7 @@ def open_drawerA():
         sleep(0.005)
     GPIO.output(R, GPIO.LOW)
     GPIO.cleanup()
-
+# Creates the screens of the GUI
 def session1():
     global screen6
     GPIO.output(R, GPIO.HIGH)
@@ -240,7 +241,7 @@ def session4():
     Button(screen6, text = "Close Bottom Drawer", command = close_drawerA).pack()
     Button(screen6, text = "Logout", command = delete6).pack()
     back2()
-
+# Functions to check user login and the creation of users
 def login_success(clearance):
     if clearance == "1":
         session1()
@@ -262,8 +263,7 @@ def user_not_found():
     screen2.after(1500, unf.destroy)
  
 def register_user():
-    
-
+    # Creates a file which has the username, password, and clearance level in it
     read = Read()
     i1 = read.prtID()
     i1 = str(i1)
@@ -326,6 +326,7 @@ def register():
     Button(screen1, text = "Back", width = 10, height = 1, command = back1).pack()
 
 def login_verify():
+    # Checks to see if the user that is trying to log in is on the file with the username, password, and clearance
     global username_verify
     global username1
     username1 = username_verify.get()
@@ -402,7 +403,4 @@ def main_screen():
 R = 18
 G = 19
 B = 20
-GPIO.setup(R, GPIO.OUT)
-GPIO.setup(G, GPIO.OUT)
-GPIO.setup(B, GPIO.OUT)
 main_screen()
